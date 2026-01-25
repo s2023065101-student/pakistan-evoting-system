@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="status-wrapper">
+
+    <div class="status-card warning">
+
+        <div class="status-icon">
+            🗳️
+        </div>
+
+        <h2>No Active Election</h2>
+
+        <p class="status-text">
+            There is currently no active election in progress.
+            <br>
+            Voting will begin once officially announced by the
+            <strong>Election Commission of Pakistan</strong>.
+        </p>
+
+        <div class="status-info">
+            ✔ Your voter account is verified  
+            <br>
+            ✔ You will be able to vote during the official election period
+        </div>
+
+        <a href="{% url 'dashboard' %}" class="status-btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="results-wrapper">
+
+    <header class="results-header">
+        <h2>📊 Published Election Results</h2>
+        <p>Election Commission of Pakistan</p>
+    </header>
+
+    {% if elections %}
+        <div class="results-card">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Election</th>
+                        <th>Period</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for election in elections %}
+                    <tr>
+                        <td>{{ election.title }}</td>
+                        <td>
+                            {{ election.start_date|date:"M d, Y" }} –
+                            {{ election.end_date|date:"M d, Y" }}
+                        </td>
+                        <td>
+                            <a href="{% url 'results_detail' election.id %}"
+                               class="action-btn secondary">
+                                View Results
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No published results available.</p>
+    {% endif %}
+
+</section>
+{% endblock %}

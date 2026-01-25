@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/voting.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="vote-wrapper">
+
+    <!-- PAGE HEADER -->
+    <header class="vote-header">
+        <h2>🗳️ {{ election.title }}</h2>
+        <p>Cast your vote carefully. You can vote only once.</p>
+    </header>
+
+    <!-- BALLOT FORM -->
+    <form method="post" class="ballot-form">
+        {% csrf_token %}
+
+        <div class="ballot-grid">
+
+            {% for candidate in candidates %}
+            <label class="ballot-card">
+                <input type="radio"
+                       name="candidate"
+                       value="{{ candidate.id }}"
+                       required>
+
+                <div class="symbol-box">
+                    <img src="{{ candidate.symbol.url }}"
+                         alt="{{ candidate.party }} symbol">
+                </div>
+
+                <div class="candidate-info">
+                    <h4>{{ candidate.name }}</h4>
+                    <p>{{ candidate.party }}</p>
+                </div>
+
+                <div class="select-indicator">
+                    ✔ Select
+                </div>
+            </label>
+            {% endfor %}
+
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="vote-submit">
+            <button type="submit" class="btn-primary">
+                🔒 Cast My Vote Securely
+            </button>
+            <p class="vote-warning">
+                ⚠️ Once submitted, your vote cannot be changed.
+            </p>
+        </div>
+    </form>
+
+</section>
+{% endblock %}

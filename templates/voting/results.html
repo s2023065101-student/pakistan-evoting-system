@@ -1,0 +1,104 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/results.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="results-wrapper">
+
+    <!-- HEADER -->
+    <header class="results-header">
+        <h2>📊 Official Election Results</h2>
+        <p>{{ election.title }} · Election Commission of Pakistan</p>
+    </header>
+
+    <!-- RESULTS TABLE -->
+    <div class="results-card">
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Candidate</th>
+                    <th>Party</th>
+                    <th>Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in results %}
+                <tr class="{% if forloop.first %}winner-row{% endif %}">
+                    <td>
+                        {% if forloop.first %}
+                            🥇
+                        {% elif forloop.counter == 2 %}
+                            🥈
+                        {% elif forloop.counter == 3 %}
+                            🥉
+                        {% else %}
+                            {{ forloop.counter }}
+                        {% endif %}
+                    </td>
+                    <td>{{ c.name }}</td>
+                    <td>{{ c.party }}</td>
+                    <td>{{ c.vote_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CHART SECTION -->
+    <div class="results-chart">
+        <h3>Vote Distribution</h3>
+
+        {{ labels|json_script:"labels-data" }}
+        {{ votes|json_script:"votes-data" }}
+
+        <canvas id="resultsChart" height="120"></canvas>
+    </div>
+
+    <!-- FOOTNOTE -->
+    <div class="results-footnote">
+        ✔ Results officially published by Election Commission of Pakistan  
+        <br>
+        🔒 Data is read-only and securely audited
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = JSON.parse(
+    document.getElementById('labels-data').textContent
+);
+const votes = JSON.parse(
+    document.getElementById('votes-data').textContent
+);
+
+const ctx = document.getElementById('resultsChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Votes',
+            data: votes
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

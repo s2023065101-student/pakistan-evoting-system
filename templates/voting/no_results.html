@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="status-wrapper">
+
+    <div class="status-card info">
+
+        <div class="status-icon">
+            📊
+        </div>
+
+        <h2>Results Not Published</h2>
+
+        <p class="status-text">
+            Election results have not been published yet.
+            <br>
+            Results will be made available only after official verification
+            by the <strong>Election Commission of Pakistan</strong>.
+        </p>
+
+        <div class="status-info">
+            🔒 Results are protected against unauthorized access  
+            <br>
+            ✔ Transparency is ensured after official publication
+        </div>
+
+        <a href="{% url 'dashboard' %}" class="status-btn">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</section>
+{% endblock %}

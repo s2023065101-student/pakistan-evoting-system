@@ -1,0 +1,125 @@
+.vote-wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* HEADER */
+.vote-header {
+    margin-bottom: 30px;
+}
+
+.vote-header h2 {
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+.vote-header p {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* BALLOT GRID */
+.ballot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 26px;
+}
+
+/* BALLOT CARD */
+.ballot-card {
+    position: relative;
+    background: rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 22px;
+    cursor: pointer;
+    transition: transform .3s, box-shadow .3s;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.55);
+}
+
+.ballot-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.7);
+}
+
+/* RADIO HIDE */
+.ballot-card input {
+    display: none;
+}
+
+/* SYMBOL */
+.symbol-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.symbol-box img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+/* INFO */
+.candidate-info {
+    text-align: center;
+}
+
+.candidate-info h4 {
+    margin: 6px 0 4px;
+    font-size: 16px;
+}
+
+.candidate-info p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+/* SELECT INDICATOR */
+.select-indicator {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+/* SELECTED STATE */
+.ballot-card:has(input:checked) {
+    outline: 3px solid #7cff9a;
+    background: rgba(124,255,154,0.15);
+}
+
+.ballot-card:has(input:checked) .select-indicator {
+    opacity: 1;
+}
+
+/* SUBMIT */
+.vote-submit {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.vote-submit .btn-primary {
+    padding: 16px 32px;
+    font-size: 16px;
+}
+
+.vote-warning {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .symbol-box img {
+        width: 70px;
+        height: 70px;
+    }
+}

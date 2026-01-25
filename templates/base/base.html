@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pakistan National E-Voting System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- NATIONAL HEADER -->
+<header class="national-header">
+    <div class="header-inner">
+
+        <!-- CSS Flag -->
+        <div class="pak-flag">
+            <span class="crescent"></span>
+            <span class="star">★</span>
+        </div>
+
+        <div class="header-text">
+            <h1>Election Commission of Pakistan</h1>
+            <p>Secure National E-Voting Portal</p>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'vote' %}">Vote</a>
+        <a href="{% url 'results' %}">Results</a>
+        <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+    </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="national-footer">
+    <p>© Government of Pakistan</p>
+    <p>Election Commission of Pakistan · Demo E-Voting System</p>
+</footer>
+
+<script src="{% static 'js/base.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

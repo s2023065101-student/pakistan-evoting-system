@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="dashboard-wrapper">
+
+    <!-- PAGE TITLE -->
+    <header class="dashboard-header">
+        <h2>🇵🇰 Voter Dashboard</h2>
+        <p>Secure access to your voting profile</p>
+    </header>
+
+    <!-- INFO CARDS -->
+    <div class="dashboard-grid">
+
+        <!-- PROFILE CARD -->
+        <div class="dashboard-card profile-card">
+            <h3>👤 Voter Profile</h3>
+
+            <ul class="profile-list">
+                <li><span>Name</span><strong>{{ full_name }}</strong></li>
+                <li><span>CNIC</span><strong>{{ cnic }}</strong></li>
+                <li><span>Constituency</span><strong>{{ constituency }}</strong></li>
+            </ul>
+
+            <div class="verified-badge">
+                ✔ Verified by Election Commission
+            </div>
+        </div>
+
+       {% if active_election %}
+    {% if has_voted %}
+        <div class="status-box voted">
+            ✔ Vote Cast for "{{ active_election.title }}"
+        </div>
+    {% else %}
+        <div class="status-box not-voted">
+            🗳️ Voting Open: "{{ active_election.title }}"
+        </div>
+        <a href="{% url 'vote' %}" class="action-btn vote-btn">
+            Vote Now
+        </a>
+    {% endif %}
+{% else %}
+    <div class="status-box not-voted">
+        ⏳ No active election at this time
+    </div>
+{% endif %}
+
+    <!-- ACTION BAR -->
+    <div class="dashboard-actions">
+        <a href="{% url 'results' %}" class="action-btn secondary">
+            📊 View Results
+        </a>
+
+        
+
+    <!-- AI ASSISTANT -->
+    <section class="ai-section">
+        <h3>🤖 Election AI Assistant</h3>
+        <p class="ai-subtitle">
+            Ask about voting process, security, or results (neutral guidance)
+        </p>
+
+        <div class="ai-box">
+            <div id="ai-response" class="ai-response">
+                Hello! I am the Election Assistant. How can I help you today?
+            </div>
+
+            <div class="ai-input-row">
+                <input type="text" id="ai-input"
+                       placeholder="Type your question here…" />
+                <button onclick="askAI()">Ask</button>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<script>
+function askAI() {
+    const msg = document.getElementById("ai-input").value;
+
+    if (!msg.trim()) return;
+
+    fetch("{% url 'ai_chat' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "message=" + encodeURIComponent(msg)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("ai-response").innerText = data.reply;
+        document.getElementById("ai-input").value = "";
+    });
+}
+</script>
+
+{% endblock %}

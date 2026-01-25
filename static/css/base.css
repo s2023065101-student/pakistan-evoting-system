@@ -1,0 +1,148 @@
+:root {
+    --pak-green: #01411C;
+    --pak-green-dark: #012f14;
+    --pak-white: #ffffff;
+    --glass-bg: rgba(255,255,255,0.12);
+}
+
+/* RESET */
+* {
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background:
+        linear-gradient(135deg,
+            rgba(1,65,28,0.95),
+            rgba(1,47,20,0.95)
+        );
+    color: var(--pak-white);
+}
+
+/* HEADER */
+.national-header {
+    background: linear-gradient(
+        to right,
+        var(--pak-green),
+        var(--pak-green-dark)
+    );
+    border-bottom: 3px solid #0a8f08;
+}
+
+/* HEADER INNER */
+.header-inner {
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 20px;
+}
+
+/* CSS FLAG */
+.pak-flag {
+    position: relative;
+    width: 60px;
+    height: 40px;
+    background: var(--pak-green);
+    border-radius: 4px;
+}
+
+.crescent {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 4px solid white;
+    border-radius: 50%;
+    top: 8px;
+    left: 10px;
+    border-right-color: transparent;
+}
+
+.star {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 11px;
+    left: 32px;
+}
+
+/* HEADER TEXT */
+.header-text h1 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+/* NAV */
+.top-nav {
+    display: flex;
+    gap: 22px;
+    padding: 10px 40px;
+    background: rgba(0,0,0,0.35);
+}
+
+.top-nav a {
+    color: #c9ffd1;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
+
+.top-nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: #7cff9a;
+    transition: width .3s;
+}
+
+.top-nav a:hover::after {
+    width: 100%;
+}
+
+.logout-link {
+    margin-left: auto;
+    color: #ffb3b3;
+}
+
+/* MAIN */
+.main-content {
+    min-height: 75vh;
+    padding: 40px;
+}
+
+/* FOOTER */
+.national-footer {
+    text-align: center;
+    padding: 16px;
+    background: rgba(0,0,0,0.6);
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .top-nav {
+        flex-wrap: wrap;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+}
