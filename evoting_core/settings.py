@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-vztcz)i7c7un3@&w&#v^$gz%m0-q4c7-hggpziiv_a)1@^hi^j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [ 'evoting-system.onrender.com']
+ALLOWED_HOSTS = [  'evoting-system-q9gl.onrender.com',
+    '.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://evoting-system-q9gl.onrender.com'
+]
 
 
 # Application definition

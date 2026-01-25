@@ -1,5 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
+from django.shortcuts import redirect
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -7,6 +9,7 @@ urlpatterns = [
        path('accounts/', include('accounts.urls')),
        path('vote/', include('voting.urls')),
        path('ai/', include('ai_assistant.urls')),
+          path('', lambda request: redirect('login')),
 
 
 ]
