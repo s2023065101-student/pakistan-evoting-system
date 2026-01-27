@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <h2>Voter Login</h2>
+            <p>Election Commission of Pakistan</p>
+        </div>
+
+        <!-- ❌ LOGIN FAILURE MESSAGE -->
+        {% if form.non_field_errors %}
+        <div class="auth-error">
+            ❌ You have entered wrong CNIC or password
+        </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="input-group">
+                <span class="icon">🆔</span>
+                <input type="text"
+                       name="username"
+                       placeholder="13-Digit CNIC"
+                       maxlength="13"
+                       autocomplete="off"
+                       required>
+            </div>
+
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password"
+                       name="password"
+                       placeholder="Password"
+                       required>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                Secure Login
+            </button>
+        </form>
+
+        <div class="switch-auth">
+            New voter?
+            <a href="{% url 'signup' %}">Create account</a>
+        </div>
+
+        <div class="auth-footer">
+            🔐 Secure • Audited • One-Vote-Only System
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}
