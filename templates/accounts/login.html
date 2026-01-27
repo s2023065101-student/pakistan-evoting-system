@@ -14,13 +14,20 @@
             <p>Election Commission of Pakistan</p>
         </div>
 
+        <!-- ❌ LOGIN FAILURE MESSAGE -->
+        {% if form.non_field_errors %}
+        <div class="auth-error">
+            ❌ You have entered wrong CNIC or password
+        </div>
+        {% endif %}
+
         <form method="post" novalidate>
             {% csrf_token %}
 
             <div class="input-group">
                 <span class="icon">🆔</span>
                 <input type="text"
-                       name="cnic"
+                       name="username"
                        placeholder="13-Digit CNIC"
                        maxlength="13"
                        autocomplete="off"

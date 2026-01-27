@@ -99,3 +99,24 @@
     font-size: 12px;
     opacity: 0.85;
 }
+/* ===== LOGIN ERROR MESSAGE ===== */
+.auth-error {
+    background: linear-gradient(135deg, #c0392b, #922b21);
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    animation: shake 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
