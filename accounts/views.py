@@ -28,20 +28,22 @@ def signup_view(request):
 
 from django.contrib.auth import authenticate, login
 
+from django.contrib import messages
+
 def login_view(request):
     if request.method == 'POST':
-        cnic = request.POST.get('cnic')
+        cnic = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, cnic=cnic, password=password)
-
-        if user is not None:
+        user = authenticate(request, username=cnic, password=password)
+        if user:
             login(request, user)
             return redirect('dashboard')
         else:
-            print("LOGIN FAILED")  # debug
+            messages.error(request, "You have entered wrong CNIC or password")
 
     return render(request, 'accounts/login.html')
+
 
 
 def logout_view(request):
