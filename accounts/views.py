@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignupForm
-from django.views.decorators.csrf import csrf_exempt
+
 
 
 def signup_view(request):
@@ -31,7 +31,7 @@ def signup_view(request):
 from django.contrib.auth import authenticate, login
 
 from django.contrib import messages
-@csrf_exempt
+
 def login_view(request):
     if request.method == 'POST':
         cnic = request.POST.get('username')
